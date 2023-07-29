@@ -115,7 +115,7 @@ func (c *Client) postXml(ctx context.Context, path string, request interface{}, 
 	}
 
 	data, err := io.ReadAll(io.LimitReader(resp.Body, 10<<20))
-	if err != nil {
+	if err != nil && err != io.EOF {
 		return err
 	}
 	log.Printf("xml response: %s", string(data))
